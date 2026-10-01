@@ -1,0 +1,353 @@
+[
+  {
+    "title": "Arabian Sea Luxury Retreat",
+    "city": "Goa",
+    "image": "Arabian Sea Luxury Retreat.jpg",
+    "pricePerNight": 4500,
+    "rating": 4.9,
+    "guestFavourite": true
+  },
+  {
+    "title": "Baga Beach Mid-Range Inn",
+    "city": "Goa",
+    "image": "Baga Beach Mid-Range Inn.jpg",
+    "pricePerNight": 2200,
+    "rating": 4.7,
+    "guestFavourite": false
+  },
+  {
+    "title": "Beachfront Luxury Villa",
+    "city": "Goa",
+    "image": "Beachfront Luxury Villa.jpg",
+    "pricePerNight": 5500,
+    "rating": 4.9,
+    "guestFavourite": true
+  },
+  {
+    "title": "Budget Beach Hut",
+    "city": "Goa",
+    "image": "Budget Beach Hut.jpg",
+    "pricePerNight": 1200,
+    "rating": 4.6,
+    "guestFavourite": false
+  },
+  {
+    "title": "Candolim Boutique Resort",
+    "city": "Goa",
+    "image": "Candolim Boutique Resort.jpg",
+    "pricePerNight": 3200,
+    "rating": 4.8,
+    "guestFavourite": true
+  },
+  {
+    "title": "Cozy Riverside Cottage",
+    "city": "Rishikesh",
+    "image": "Cozy Riverside Cottage.jpg",
+    "pricePerNight": 1200,
+    "rating": 5.0,
+    "guestFavourite": true
+  },
+  {
+    "title": "Ganga View Backpacker Hostel",
+    "city": "Rishikesh",
+    "image": "Ganga View Backpacker Hostel.jpg",
+    "pricePerNight": 700,
+    "rating": 4.8,
+    "guestFavourite": false
+  },
+  {
+    "title": "Heritage Haveli Suites",
+    "city": "Jaipur",
+    "image": "Heritage Haveli Suites.jpg",
+    "pricePerNight": 2800,
+    "rating": 4.8,
+    "guestFavourite": true
+  },
+  {
+    "title": "Heritage Mall Road Suites",
+    "city": "Manali",
+    "image": "Heritage Mall Road Suites.jpg",
+    "pricePerNight": 2600,
+    "rating": 4.7,
+    "guestFavourite": false
+  },
+  {
+    "title": "Himalayan Grand Luxury Resort",
+    "city": "Manali",
+    "image": "Himalayan Grand Luxury Resort.jpg",
+    "pricePerNight": 4200,
+    "rating": 4.9,
+    "guestFavourite": true
+  },
+  {
+    "title": "Nubra Valley Desert Camp",
+    "city": "Leh-Ladakh",
+    "image": "Nubra Valley Desert Camp.jpg",
+    "pricePerNight": 3000,
+    "rating": 4.8,
+    "guestFavourite": true
+  },
+  {
+    "title": "Old Leh Budget Guesthouse",
+    "city": "Leh-Ladakh",
+    "image": "Old Leh Budget Guesthouse.jpg",
+    "pricePerNight": 1100,
+    "rating": 4.6,
+    "guestFavourite": false
+  },
+  {
+    "title": "Palolem Budget Beach Rooms",
+    "city": "Goa",
+    "image": "Palolem Budget Beach Rooms.jpg",
+    "pricePerNight": 1400,
+    "rating": 4.7,
+    "guestFavourite": false
+  },
+  {
+    "title": "Panchgani Road Homestay",
+    "city": "Panchgani",
+    "image": "Panchgani Road Homestay.jpg",
+    "pricePerNight": 1800,
+    "rating": 4.8,
+    "guestFavourite": true
+  },
+  {
+    "title": "Pangong Lake Luxury Camp",
+    "city": "Leh-Ladakh",
+    "image": "Pangong Lake Luxury Camp.jpg",
+    "pricePerNight": 4800,
+    "rating": 4.9,
+    "guestFavourite": true
+  },
+  {
+    "title": "Pine Ridge Mountain Lodge",
+    "city": "Manali",
+    "image": "Pine Ridge Mountain Lodge.jpg",
+    "pricePerNight": 2500,
+    "rating": 4.9,
+    "guestFavourite": true
+  },
+  {
+    "title": "Pink City Palace Rooms",
+    "city": "Jaipur",
+    "image": "Pink City Palace Rooms.jpg",
+    "pricePerNight": 2300,
+    "rating": 4.8,
+    "guestFavourite": true
+  },
+  {
+    "title": "Riverside Camping Pods",
+    "city": "Rishikesh",
+    "image": "Riverside Camping Pods.jpg",
+    "pricePerNight": 900,
+    "rating": 4.9,
+    "guestFavourite": true
+  },
+  {
+    "title": "Royal Lake Palace Retreat",
+    "city": "Udaipur",
+    "image": "Royal Lake Palace Retreat.jpg",
+    "pricePerNight": 5000,
+    "rating": 4.9,
+    "guestFavourite": true
+  },
+  {
+    "title": "Solang Valley Retreat",
+    "city": "Manali",
+    "image": "Solang Valley Retreat.jpg",
+    "pricePerNight": 2200,
+    "rating": 4.8,
+    "guestFavourite": true
+  },
+  {
+    "title": "Strawberry Hills Resort",
+    "city": "Mahabaleshwar",
+    "image": "Strawberry Hills Resort.jpg",
+    "pricePerNight": 2800,
+    "rating": 4.8,
+    "guestFavourite": true
+  },
+  {
+    "title": "Mountain Mist Retreat",
+    "city": "Rishikesh",
+    "image": "Mountain Mist Retreat.jpg",
+    "pricePerNight": 1500,
+    "rating": 4.8,
+    "guestFavourite": true
+  },
+  {
+    "title": "Little Ganga Homestay",
+    "city": "Rishikesh",
+    "image": "Little Ganga Homestay.jpg",
+    "pricePerNight": 1100,
+    "rating": 4.7,
+    "guestFavourite": false
+  },
+  {
+    "title": "Sunset Valley Stay",
+    "city": "Rishikesh",
+    "image": "Sunset Valley Stay.jpg",
+    "pricePerNight": 1800,
+    "rating": 4.9,
+    "guestFavourite": true
+  },
+   {
+    "title": "Amber Fort Heritage Stay",
+    "city": "Jaipur",
+    "image": "Amber Fort Heritage Stay.jpg",
+    "pricePerNight": 3200,
+    "rating": 4.9,
+    "guestFavourite": true
+  },
+  {
+    "title": "Jaipur Royal Garden Hotel",
+    "city": "Jaipur",
+    "image": "Jaipur Royal Garden Hotel.jpg",
+    "pricePerNight": 2100,
+    "rating": 4.7,
+    "guestFavourite": false
+  },
+  {
+    "title": "Hawa Mahal Boutique Stay",
+    "city": "Jaipur",
+    "image": "Hawa Mahal Boutique Stay.jpg",
+    "pricePerNight": 2600,
+    "rating": 4.8,
+    "guestFavourite": false
+  },
+  {
+    "title": "Snow Peak Valley Resort",
+    "city": "Manali",
+    "image": "Snow Peak Valley Resort.jpg",
+    "pricePerNight": 3500,
+    "rating": 4.8,
+    "guestFavourite": true
+  },
+  {
+    "title": "Beas River View Homestay",
+    "city": "Manali",
+    "image": "Beas River View Homestay.jpg",
+    "pricePerNight": 1900,
+    "rating": 4.7,
+    "guestFavourite": false
+  },
+   {
+    "title": "Leh Palace View Retreat",
+    "city": "Leh-Ladakh",
+    "image": "Leh Palace View Retreat.jpg",
+    "pricePerNight": 2600,
+    "rating": 4.8,
+    "guestFavourite": true
+  },
+  {
+    "title": "Khardungla Mountain Guesthouse",
+    "city": "Leh-Ladakh",
+    "image": "Khardungla Mountain Guesthouse.jpg",
+    "pricePerNight": 1500,
+    "rating": 4.6,
+    "guestFavourite": false
+  },
+  {
+    "title": "Himalayan Lake View Camp",
+    "city": "Leh-Ladakh",
+    "image": "Himalayan Lake View Camp.jpg",
+    "pricePerNight": 3800,
+    "rating": 4.9,
+    "guestFavourite": true
+  },
+  {
+    "title": "Table Land Valley Retreat",
+    "city": "Panchgani",
+    "image": "Table Land Valley Retreat.jpg",
+    "pricePerNight": 2400,
+    "rating": 4.9,
+    "guestFavourite": true
+  },
+  {
+    "title": "Strawberry Valley Homestay",
+    "city": "Panchgani",
+    "image": "Strawberry Valley Homestay.jpg",
+    "pricePerNight": 1600,
+    "rating": 4.7,
+    "guestFavourite": false
+  },
+  {
+    "title": "Hillside View Cottage",
+    "city": "Panchgani",
+    "image": "Hillside View Cottage.jpg",
+    "pricePerNight": 2100,
+    "rating": 4.8,
+    "guestFavourite": true
+  },
+  {
+  "title": "Panchgani Sunset Villa",
+  "city": "Panchgani",
+  "image": "Panchgani Sunset Villa.jpg",
+  "pricePerNight": 2700,
+  "rating": 4.9,
+  "guestFavourite": true
+  },
+   {
+    "title": "Lake Pichola Heritage Haveli",
+    "city": "Udaipur",
+    "image": "Lake Pichola Heritage Haveli.jpg",
+    "pricePerNight": 3200,
+    "guestFavourite": true
+  },
+  {
+    "title": "City Palace View Hotel",
+    "city": "Udaipur",
+    "image": "City Palace View Hotel.jpg",
+    "pricePerNight": 2800,
+    "guestFavourite": false
+  },
+  {
+    "title": "Aravalli Hills Retreat",
+    "city": "Udaipur",
+    "image": "Aravalli Hills Retreat.jpg",
+    "pricePerNight": 2400,
+    "guestFavourite": true
+  },
+  {
+    "title": "Fateh Sagar Lake Resort",
+    "city": "Udaipur",
+    "image": "Fateh Sagar Lake Resort.jpg",
+    "pricePerNight": 3800,
+    "guestFavourite": true
+  },
+  {
+    "title": "Royal Garden Courtyard Stay",
+    "city": "Udaipur",
+    "image": "Royal Garden Courtyard Stay.jpg",
+    "pricePerNight": 2100,
+    "guestFavourite": false
+  },
+   {
+    "title": "Venna Lake View Resort",
+    "city": "Mahabaleshwar",
+    "image": "Venna Lake View Resort.jpg",
+    "pricePerNight": 3200,
+    "guestFavourite": true
+  },
+  {
+    "title": "Mapro Garden Homestay",
+    "city": "Mahabaleshwar",
+    "image": "Mapro Garden Homestay.jpg",
+    "pricePerNight": 1900,
+    "guestFavourite": false
+  },
+  {
+    "title": "Arthur Hill Retreat",
+    "city": "Mahabaleshwar",
+    "image": "Arthur Hill Retreat.jpg",
+    "pricePerNight": 2500,
+    "guestFavourite": true
+  },
+  {
+    "title": "Panchgani Road Mountain Stay",
+    "city": "Mahabaleshwar",
+    "image": "Panchgani Road Mountain Stay.jpg",
+    "pricePerNight": 2200,
+    "guestFavourite": false
+  }
+]

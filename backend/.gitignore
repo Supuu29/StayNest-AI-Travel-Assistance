@@ -1,0 +1,12 @@
+# Dependencies (anyone can rebuild these with npm install)
+node_modules/
+
+# Secrets: NEVER commit these
+.env
+.env.*
+!.env.example
+
+# Logs and OS junk
+*.log
+npm-debug.log*
+.DS_Store
