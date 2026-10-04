@@ -4,7 +4,7 @@ const Listing = require("../models/Listing");
 const TYPES = ["hotel", "lodge", "resort", "villa", "hostel", "homestay"];
 const COST_TIERS = ["budget", "mid", "premium"];
 
-// The ONLY fields an admin request may set. Anything else in the body is ignored.
+// The only fields an admin request may set
 const EDITABLE_FIELDS = [
   "title", "city", "image", "pricePerNight", "rating", "guestFavourite",
   "maxGuests", "type", "costTier", "description", "amenities", "isActive",
@@ -21,7 +21,7 @@ const SORTS = {
 
 // ---------- Small helpers ----------
 
-// The exact shape the frontend receives. Built by hand so we control every field.
+// The exact shape the frontend receives
 function formatListing(l) {
   return {
     id: l._id.toString(),
@@ -40,8 +40,6 @@ function formatListing(l) {
   };
 }
 
-// Query values can arrive as arrays (?city=a&city=b). Only plain strings are accepted;
-// anything else becomes "" so it can never act as a MongoDB operator.
 function asString(value) {
   return typeof value === "string" ? value.trim() : "";
 }
@@ -143,13 +141,13 @@ async function searchListings(query, extraFilter) {
 
 // GET /api/listings
 async function getListings(req, res) {
-  // Public users only ever see active stays.
+  //Show active stays only.
   const result = await searchListings(req.query, { isActive: true });
   if (result.error) return res.status(400).json({ error: result.error });
   return res.status(200).json(result.data);
 }
 
-// GET /api/listings/cities  (handy for a city dropdown)
+// GET /api/listings/cities 
 async function getCities(req, res) {
   const cities = await Listing.distinct("city", { isActive: true });
   cities.sort((a, b) => a.localeCompare(b));
@@ -166,7 +164,7 @@ async function getListingById(req, res) {
   return res.status(200).json({ listing: formatListing(listing) });
 }
 
-// ---------- ADMIN handlers (protected by adminKey middleware in adminRoutes) ----------
+// ---------- ADMIN handlers ----------
 
 // GET /api/admin/listings  (also shows removed stays; filter with ?isActive=true|false)
 async function adminGetListings(req, res) {
@@ -233,7 +231,7 @@ async function createListing(req, res) {
     return res.status(409).json({ error: "A stay with this title already exists in this city" });
   }
 
-  // If the owner did not choose a costTier, work it out from the price so the AI planner can use it.
+  // A new price without an explicit costTier means the tier should follow the price.
   if (data.costTier === undefined && data.pricePerNight !== undefined) {
     const price = Number(data.pricePerNight);
     if (Number.isFinite(price)) data.costTier = deriveCostTier(price);
@@ -259,7 +257,7 @@ async function updateListing(req, res) {
   const problem = cleanInput(data);
   if (problem) return res.status(400).json({ error: problem });
 
-  // Only check for clashes when the title or city is actually changing.
+  // If the title or city is changing, check that the new combination is not already taken by another stay.
   if (data.title !== undefined || data.city !== undefined) {
     const newTitle = data.title !== undefined ? data.title : listing.title;
     const newCity = data.city !== undefined ? data.city : listing.city;
@@ -268,7 +266,7 @@ async function updateListing(req, res) {
     }
   }
 
-  // A new price without an explicit costTier means the tier should follow the price.
+  // If the price is changing but the costTier is not, derive the tier from the new price.
   if (data.pricePerNight !== undefined && data.costTier === undefined) {
     const price = Number(data.pricePerNight);
     if (Number.isFinite(price)) data.costTier = deriveCostTier(price);
@@ -280,7 +278,7 @@ async function updateListing(req, res) {
   return res.status(200).json({ listing: formatListing(listing) });
 }
 
-// DELETE /api/admin/listings/:id  -> "soft delete": hide the stay, keep the document and its bookings.
+// DELETE /api/admin/listings/:id  
 async function deleteListing(req, res) {
   if (!mongoose.isValidObjectId(req.params.id)) {
     return res.status(400).json({ error: "Invalid listing id" });

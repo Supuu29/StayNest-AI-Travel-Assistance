@@ -7,7 +7,6 @@ const MAX_NIGHTS = 30;
 
 // ---------- Helpers ----------
 
-// The exact shape the frontend receives. Built by hand so we control every field.
 function formatBooking(b) {
   const l = b.listing;
   // The listing is null only if someone hard-deleted it from the database by hand.

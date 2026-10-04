@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
-// A simple email format check: something@something.something
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// There is deliberately NO role field: every account is a normal user.
+//for user role 
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -26,21 +25,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
       minlength: [6, "Password must be at least 6 characters"],
-      select: false, // never returned by queries unless we ask with .select("+password")
+      select: false,
     },
   },
   { timestamps: true } // adds createdAt and updatedAt automatically
 );
 
-// Hash the password before saving, but ONLY if it changed.
-// Without this check, updating a user's name would hash the already-hashed password again.
+
 userSchema.pre("save", async function () {
   if (!this.isModified("password")) return;
   this.password = await bcrypt.hash(this.password, 10); // 10 salt rounds
 });
 
-// Compare a plain-text password from the login form with the stored hash.
-// Note: this only works if the user was loaded with .select("+password").
 userSchema.methods.comparePassword = async function (candidate) {
   return bcrypt.compare(candidate, this.password);
 };

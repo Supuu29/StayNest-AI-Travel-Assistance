@@ -1,11 +1,9 @@
-// Pure helper functions: no Express, no database, no network. Easy to test and explain.
-
+// Pure helper functions: no Express, no database, no network.
 const CATEGORIES = ["stay", "food", "transport", "buffer"];
 
 // ---------- City names ----------
 
-// Different spellings the user might type, mapped to the name stored in our database.
-// A Map is used (not a plain object) so a destination like "constructor" can't match by accident.
+// Aliases for cities that are commonly typed in different ways. The normalized name is what we use in the fallback split.
 const CITY_ALIASES = new Map([
   ["ladakh", "Leh-Ladakh"],
   ["leh", "Leh-Ladakh"],
@@ -18,7 +16,7 @@ const CITY_ALIASES = new Map([
 // Cities where stays take a bigger share of the budget in the fallback split.
 const HIGH_STAY_CITIES = new Set(["goa", "udaipur", "leh-ladakh"]);
 
-// Cleans the text and applies the aliases. Unknown cities are returned as typed (trimmed).
+// Normalizes a city name to a canonical form, using aliases. Returns the original string if no alias is found.
 function normalizeCity(destination) {
   const cleaned = String(destination).trim().replace(/\s+/g, " ");
   return CITY_ALIASES.get(cleaned.toLowerCase()) || cleaned;
@@ -28,8 +26,7 @@ function normalizeCity(destination) {
 
 // Builds the instruction we send to Gemini.
 function buildPrompt({ destination, travelers, days, budget }) {
-  // The destination is user text, so remove quotes and line breaks. This stops someone
-  // from typing extra instructions into the field (prompt injection).
+  // The destination is treated as plain data, not instructions. We clean it up to avoid Gemini misinterpreting it.
   const safeDestination = String(destination).replace(/["\r\n]+/g, " ").trim();
 
   return `You are an expert Indian travel budget planner.

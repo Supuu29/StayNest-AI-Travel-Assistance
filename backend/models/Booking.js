@@ -19,10 +19,12 @@ const bookingSchema = new mongoose.Schema(
       required: [true, "Number of guests is required"],
       min: [1, "At least 1 guest is required"],
     },
-    // The three money/time fields are always computed by the server, never by the client.
+    
+    // Store the number of nights and total price at the time of booking to avoid recalculating if the listing's price changes later.
     nights: { type: Number, required: true, min: 1 },
     totalPrice: { type: Number, required: true, min: 0 },
-    // Snapshot of the price when booked, so later price edits do not change old bookings.
+
+
     pricePerNightAtBooking: { type: Number, required: true, min: 0 },
     status: {
       type: String,
@@ -36,7 +38,7 @@ const bookingSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Speeds up the availability check ("any booking for this stay overlapping these dates?").
+// Create a compound index to ensure that no two bookings for the same listing overlap in dates.
 bookingSchema.index({ listing: 1, checkIn: 1, checkOut: 1 });
 
 module.exports = mongoose.model("Booking", bookingSchema);

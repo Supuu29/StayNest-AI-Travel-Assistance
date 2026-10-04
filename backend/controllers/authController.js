@@ -13,11 +13,8 @@ const formatUser = (user) => ({
 
 // POST /api/auth/signup
 const signup = async (req, res) => {
-  // Express 5 leaves req.body undefined when no body was sent, so we guard against that.
   const { name, email, password } = req.body || {};
-  // NOTE: we deliberately do NOT read `role` from the body.
 
-  // typeof checks also block tricks like sending { "email": { "$ne": null } }
   if (typeof name !== "string" || !name.trim()) {
     return res.status(400).json({ error: "Name is required" });
   }
@@ -51,7 +48,6 @@ const signup = async (req, res) => {
     return res.status(409).json({ error: "Email already registered" });
   }
 
-  // role is not passed, so the schema default "user" always applies
   const user = await User.create({
     name: name.trim(),
     email: cleanEmail,
@@ -60,6 +56,7 @@ const signup = async (req, res) => {
 
   res.status(201).json({ token: generateToken(user._id), user: formatUser(user) });
 };
+
 
 // POST /api/auth/login
 const login = async (req, res) => {
@@ -72,11 +69,8 @@ const login = async (req, res) => {
     return res.status(400).json({ error: "Email and password are required" });
   }
 
-  // password has select:false, so we must ask for it explicitly here
   const user = await User.findOne({ email: email.trim().toLowerCase() }).select("+password");
 
-  // Same message for "no such email" and "wrong password",
-  // so attackers can't discover which emails are registered.
   if (!user || !(await user.comparePassword(password))) {
     return res.status(401).json({ error: "Invalid email or password" });
   }
