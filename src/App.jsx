@@ -6,6 +6,7 @@ import { AppLayout } from "./Components/AppLayout";
 import Home from "./Pages/Home";
 import Stays from "./Pages/Stays";
 import AIBudgetPlanner from "./Pages/AIBudgetPlanner";
+import { MyBookings } from "./Pages/MyBookings";
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
           {/* AI Budget Planner Page */}
           <Route path="/ai-budget-planner" element={<AIBudgetPlanner />} />
 
-          
+          <Route path="/my-bookings" element={<MyBookings />} />
 
         </Route>
       </Routes>
