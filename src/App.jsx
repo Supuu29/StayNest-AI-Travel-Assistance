@@ -10,7 +10,7 @@ import MyBookings from "./Pages/MyBookings";
 
 import Login from "./Pages/login";
 import Signup from "./Pages/Signup";
-import ProtectedRoute from "./Components/ProtectedRoute";
+import ProtectedRoute from "./Components/protectedRoute";
 import Booking from "./Pages/booking";
 import About from "./Pages/About";
 
