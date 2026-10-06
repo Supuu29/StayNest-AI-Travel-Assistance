@@ -4,31 +4,64 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
 const authRoutes = require("./routes/authRoutes");
+const aiRoutes = require("./routes/aiRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
 
 dotenv.config();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
+  })
+);
+
 app.use(express.json());
 
-// Auth Routes
+// ================================
+// Routes
+// ================================
+
+// Authentication
 app.use("/api/auth", authRoutes);
 
-// Test route
+// AI Budget Planner
+app.use("/api/ai", aiRoutes);
+
+// Bookings
+app.use("/api/bookings", bookingRoutes);
+
+// ================================
+// Test Routes
+// ================================
+
 app.get("/", (req, res) => {
   res.send("StayNest Backend is Running 🚀");
 });
 
-// MongoDB connection
+app.get("/api/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "StayNest API is working",
+  });
+});
+
+// ================================
+// MongoDB Connection
+// ================================
+
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("MongoDB Connected ✅");
 
-    app.listen(5000, () => {
-      console.log("Server running on port 5000 🚀");
+    app.listen(process.env.PORT || 5000, () => {
+      console.log(
+        `Server running on port ${
+          process.env.PORT || 5000
+        } 🚀`
+      );
     });
   })
   .catch((error) => {

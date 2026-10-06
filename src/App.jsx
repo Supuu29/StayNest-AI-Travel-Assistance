@@ -6,11 +6,13 @@ import { AppLayout } from "./Components/AppLayout";
 import Home from "./Pages/Home";
 import Stays from "./Pages/Stays";
 import AIBudgetPlanner from "./Pages/AIBudgetPlanner";
-import { MyBookings } from "./Pages/MyBookings";
+import MyBookings from "./Pages/MyBookings";
 
 import Login from "./Pages/login";
 import Signup from "./Pages/Signup";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import Booking from "./Pages/booking";
+import About from "./Pages/About";
 
 function App() {
   return (
@@ -41,11 +43,11 @@ function App() {
             }
           />
 
-          {/* My Bookings */}
-          <Route
-            path="/my-bookings"
-            element={<MyBookings />}
-          />
+          <Route path="/booking" element={<Booking />} />
+
+          <Route path="/my-bookings" element={<MyBookings />} />
+
+          <Route path="/About" element={<About />} />
 
         </Route>
 
