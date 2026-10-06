@@ -1,86 +1,129 @@
 const User = require("../models/User");
-const generateToken = require("../utils/generateToken");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-const EMAIL_REGEX = /^\S+@\S+\.\S+$/;
-
-// The ONLY shape of user we ever send to the frontend. It never includes the password.
-const formatUser = (user) => ({
-  id: user._id.toString(),
-  name: user.name,
-  email: user.email,
-  role: user.role,
-});
-
-// POST /api/auth/signup
+// =====================
+// SIGNUP
+// =====================
 const signup = async (req, res) => {
-  const { name, email, password } = req.body || {};
+  try {
+    const { name, email, password } = req.body;
 
-  if (typeof name !== "string" || !name.trim()) {
-    return res.status(400).json({ error: "Name is required" });
-  }
-  if (name.trim().length < 2 || name.trim().length > 50) {
-    return res.status(400).json({ error: "Name must be between 2 and 50 characters" });
-  }
+    // Check all fields
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
+    }
 
-  if (typeof email !== "string" || !email.trim()) {
-    return res.status(400).json({ error: "Email is required" });
-  }
-  if (!EMAIL_REGEX.test(email.trim())) {
-    return res.status(400).json({ error: "Please enter a valid email address" });
-  }
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
 
-  if (typeof password !== "string" || !password) {
-    return res.status(400).json({ error: "Password is required" });
-  }
-  if (password.length < 6) {
-    return res.status(400).json({ error: "Password must be at least 6 characters" });
-  }
-  // bcrypt only uses the first 72 bytes, so longer passwords add no security
-  if (password.length > 72) {
-    return res.status(400).json({ error: "Password must be at most 72 characters" });
-  }
+    if (existingUser) {
+      return res.status(400).json({
+        message: "User already exists",
+      });
+    }
 
-  // Emails are stored lowercase, so search the same way
-  const cleanEmail = email.trim().toLowerCase();
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-  const existing = await User.findOne({ email: cleanEmail });
-  if (existing) {
-    return res.status(409).json({ error: "Email already registered" });
+    // Create user
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    // Create JWT token
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        email: user.email,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+
+    res.status(201).json({
+      message: "Signup successful",
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    console.error("Signup Error:", error);
+
+    res.status(500).json({
+      message: "Server error",
+    });
   }
-
-  const user = await User.create({
-    name: name.trim(),
-    email: cleanEmail,
-    password, // hashed by the pre-save hook
-  });
-
-  res.status(201).json({ token: generateToken(user._id), user: formatUser(user) });
 };
 
-
-// POST /api/auth/login
+// =====================
+// LOGIN
+// =====================
 const login = async (req, res) => {
-  const { email, password } = req.body || {};
+  try {
+    const { email, password } = req.body;
 
-  if (
-    typeof email !== "string" || !email.trim() ||
-    typeof password !== "string" || !password
-  ) {
-    return res.status(400).json({ error: "Email and password are required" });
+    // Find user
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({
+        message: "Invalid email or password",
+      });
+    }
+
+    // Compare password
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      user.password
+    );
+
+    if (!isPasswordCorrect) {
+      return res.status(400).json({
+        message: "Invalid email or password",
+      });
+    }
+
+    // Create JWT token
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        email: user.email,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+
+    res.json({
+      message: "Login successful",
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    console.error("Login Error:", error);
+
+    res.status(500).json({
+      message: "Server error",
+    });
   }
-
-  const user = await User.findOne({ email: email.trim().toLowerCase() }).select("+password");
-
-  if (!user || !(await user.comparePassword(password))) {
-    return res.status(401).json({ error: "Invalid email or password" });
-  }
-
-  res.status(200).json({ token: generateToken(user._id), user: formatUser(user) });
 };
 
-// GET /api/auth/me  (protect middleware already loaded req.user)
-const getMe = async (req, res) => {
-  res.status(200).json({ user: formatUser(req.user) });
+module.exports = {
+  signup,
+  login,
 };
-
-module.exports = { signup, login, getMe };

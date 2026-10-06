@@ -8,11 +8,15 @@ import Stays from "./Pages/Stays";
 import AIBudgetPlanner from "./Pages/AIBudgetPlanner";
 import { MyBookings } from "./Pages/MyBookings";
 
+import Login from "./Pages/login";
+import Signup from "./Pages/Signup";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+
         <Route element={<AppLayout />}>
 
           {/* Home Page */}
@@ -21,12 +25,30 @@ function App() {
           {/* Stays Page */}
           <Route path="/stays" element={<Stays />} />
 
-          {/* AI Budget Planner Page */}
-          <Route path="/ai-budget-planner" element={<AIBudgetPlanner />} />
+          {/* Login Page */}
+          <Route path="/login" element={<Login />} />
 
-          <Route path="/my-bookings" element={<MyBookings />} />
+          {/* Signup Page */}
+          <Route path="/signup" element={<Signup />} />
+
+          {/* AI Budget Planner - Protected */}
+          <Route
+            path="/ai-budget-planner"
+            element={
+              <ProtectedRoute>
+                <AIBudgetPlanner />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* My Bookings */}
+          <Route
+            path="/my-bookings"
+            element={<MyBookings />}
+          />
 
         </Route>
+
       </Routes>
     </BrowserRouter>
   );
