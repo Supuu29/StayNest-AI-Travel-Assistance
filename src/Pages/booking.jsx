@@ -58,13 +58,13 @@ function Booking() {
 });
 
       const response = await fetch(
-        "http://localhost:5000/api/bookings",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+  `${import.meta.env.VITE_API_URL}/api/bookings`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
           body: JSON.stringify({
             listingId: listing.title,
             title: listing.title,

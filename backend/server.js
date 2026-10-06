@@ -47,9 +47,6 @@ app.get("/api/health", (req, res) => {
   });
 });
 
-// ================================
-// MongoDB Connection
-// ================================
 
 mongoose
   .connect(process.env.MONGO_URI)

@@ -25,13 +25,13 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      setError("");
-      setLoading(true);
+  setError("");
+  setLoading(true);
 
-      await axios.post(
-        "http://localhost:5000/api/auth/signup",
-        formData
-      );
+  await axios.post(
+    `${import.meta.env.VITE_API_URL}/api/auth/signup`,
+    formData
+  );
 
       // Signup successful → Login page
       navigate("/login");

@@ -31,20 +31,20 @@ function AIBudgetPlanner() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/ai/budget-plan",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            destination,
-            travelers,
-            days,
-            budget,
-          }),
-        }
-      );
+  `${import.meta.env.VITE_API_URL}/api/ai/budget-plan`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      destination,
+      travelers,
+      days,
+      budget,
+    }),
+  }
+);
 
       const data = await response.json();
 

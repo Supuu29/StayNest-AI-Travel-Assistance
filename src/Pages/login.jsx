@@ -22,13 +22,12 @@ const Login = () => {
       setLoading(true);
 
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
-
+  `${import.meta.env.VITE_API_URL}/api/auth/login`,
+  {
+    email,
+    password,
+  }
+);
       // Save logged-in user + JWT
       login(response.data);
 
